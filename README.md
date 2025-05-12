@@ -26,20 +26,11 @@ The application is built with a component-based architecture:
 MyNotes/
 ├── src/
 │   ├── components/
-│   │   ├── NoteList.js
-│   │   ├── NoteItem.js
-│   │   └── ArchiveList.js
 │   ├── pages/
-│   │   ├── HomePage.js
-│   │   └── ArchivePage.js
-│   ├── services/
-│   │   └── NoteService.js
+│   ├── styles/
+│   ├── utils/
 │   └── App.js
-├── assets/
-│   └── icons/
-├── styles/
-│   └── main.css
-└── index.js
+└── index.html
 ```
 
 ## Usage
