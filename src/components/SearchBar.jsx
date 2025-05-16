@@ -1,6 +1,6 @@
 function SearchBar() {
     return (
-        <div className="search-bar">
+        <div className="header-search-bar">
             <input type="text" placeholder="Search notes" />
         </div>
     )

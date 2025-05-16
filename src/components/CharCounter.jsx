@@ -1,7 +1,7 @@
 function CharCounter() {
     return (
         <div>
-            <h1>Character Counter</h1>
+            <span className="character-counter">sisa karakter : 0</span>
         </div>
     )
 }
