@@ -2,72 +2,40 @@
 
 ## Description
 
-MyNotes is a simple note-taking application that allows users to add, edit, delete, and archive notes. The app is designed with an intuitive interface, making it easy for anyone to use.
+**MyNotes** adalah aplikasi pencatatan sederhana yang memungkinkan pengguna untuk menambahkan catatan baru dan mengelola catatan yang tidak aktif melalui fitur arsip. Aplikasi ini dirancang dengan antarmuka yang intuitif dan mudah digunakan.
 
 ## Main Features
 
-* **Add Note:** Users can add a new note with a title and content.
-* **Edit Note:** Notes that have been created can be edited at any time.
-* **Delete Note:** Users can delete notes that are no longer needed.
-* **Archive Note:** Notes that are no longer active can be moved to the archive to keep the main list clean.
-* **Unarchive Note:** Archived notes can be restored at any time.
+* **Add Note:** Pengguna dapat menambahkan catatan baru dengan judul dan isi.
+* **Archive Note:** Catatan yang tidak aktif dapat dipindahkan ke bagian arsip agar daftar utama tetap rapi.
+* **Unarchive Note:** Catatan yang sudah diarsipkan dapat dikembalikan ke daftar utama kapan saja.
 
 ## Application Architecture
 
-The application is built with a component-based architecture:
+Aplikasi ini menggunakan arsitektur berbasis komponen:
 
-* **UI Layer:** Displays the list of notes and action buttons (Add, Edit, Delete, Archive).
-* **Data Layer:** Manages note data using state management or local database.
-* **Logic Layer:** Handles the logic for adding, editing, deleting, and archiving notes.
+* **UI Layer:** Menampilkan daftar catatan dan tombol aksi seperti Tambah, Arsip, dan Kembalikan.
+* **Data Layer:** Mengelola data catatan menggunakan state management atau database lokal.
+* **Logic Layer:** Menangani logika untuk menambahkan, mengarsipkan, dan mengembalikan catatan.
 
 ## Folder Structure
 
-```
 MyNotes/
 ├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── styles/
-│   ├── utils/
-│   └── App.js
+│ ├── components/
+│ ├── pages/
+│ ├── styles/
+│ ├── utils/
+│ └── App.js
 └── index.html
-```
+
 
 ## Usage
 
-1. Open the MyNotes application.
-2. On the main page, click the **Add Note** button to create a new note.
-3. Each note will be displayed in the notes list.
-4. To edit a note, click the **Edit** button next to it.
-5. If the note is no longer needed, click the **Delete** button.
-6. To move a note to the archive, click the **Archive** button.
-7. Archived notes can be accessed from the Archive page and restored at any time.
+1. Buka aplikasi **MyNotes**.
+2. Klik tombol **Add Note** untuk menambahkan catatan baru.
+3. Catatan akan muncul di daftar utama.
+4. Untuk mengarsipkan catatan, klik tombol **Archive**.
+5. Untuk mengembalikan catatan dari arsip, buka halaman **Archive** dan klik tombol **Unarchive**.
 
-## API (If using Backend)
 
-```
-GET /notes          -> Retrieve all notes
-POST /notes         -> Add a new note
-PUT /notes/:id      -> Edit a note by ID
-DELETE /notes/:id   -> Delete a note by ID
-POST /notes/:id/archive -> Archive a note
-POST /notes/:id/unarchive -> Unarchive a note
-```
-
----
-
-## License
-
-MyNotes is developed as an open-source project under the MIT License.
-
----
-
-## Contributors
-
-* Developer 1
-* Developer 2
-* Developer 3
-
----
-
-This documentation will be continuously updated as new features are added.

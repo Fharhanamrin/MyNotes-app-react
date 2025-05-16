@@ -2,7 +2,7 @@ import NoteCardItem from './NoteCardItem';
 import React from 'react';
 import { showFormattedDate } from '../utils';
 
-function NoteList({mylist}) {
+function NoteList({ mylist, handleDeleteNote, handleArchiveNote, handleUnarchiveNote }) {
     return (
         <div className='container'>
             <h1 className='note-group'>Note List</h1>
@@ -15,14 +15,23 @@ function NoteList({mylist}) {
                 padding: '1rem',
             }}>
                 {mylist.map((note) => {
+                    if (note.archived) {
+                        return null;
+                    }
                     return (
-                        <NoteCardItem 
-                        key={note.id} 
-                        title={note.title}
-                        date={showFormattedDate(note.createdAt)} 
-                        description={note.body} />
+                        <NoteCardItem
+                            key={note.id}
+                            id={note.id}
+                            title={note.title}
+                            archived={note.archived}
+                            date={showFormattedDate(note.createdAt)}
+                            description={note.body}
+                            handleDeleteNote={handleDeleteNote}
+                            handleArchiveNote={handleArchiveNote}
+                            handleUnarchiveNote={handleUnarchiveNote}
+                        />
                     )
-                })}  
+                })}
             </div>
         </div>
     );
