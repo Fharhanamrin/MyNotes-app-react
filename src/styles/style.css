@@ -18,6 +18,9 @@ label{
   width: 100%;
   padding: 2%;
 }
+.text-center{
+  text-align: center;
+}
 .card{
   background-color: white;
   color: black;
@@ -25,6 +28,8 @@ label{
   padding: 16px;
   margin: auto center;
   width: 50%;
+  display: block;
+  box-sizing: border-box;
 }
 .card-item-notes{
   background-color: white;
@@ -76,9 +81,16 @@ input::placeholder, textarea::placeholder {
   align-items: center;
   padding-left: 1%;
   padding-right: 1%;
+  padding-top: 1%;
   box-sizing: border-box;
 }
-
+.header>a{
+  text-decoration: none;
+}
+.header-title {
+  color: white;
+  text-decoration: none;
+}
 
 .action-button {
   padding: 8px 16px;

@@ -1,4 +1,6 @@
 import CharCounter from "./CharCounter";
+import PropTypes from 'prop-types';
+
 function NoteForm({ noteTitle, noteContent, remaining, counter, handleSubmit, handleNoteTitleChange, handleNoteContentChange}) {
 
     return (
@@ -22,4 +24,13 @@ function NoteForm({ noteTitle, noteContent, remaining, counter, handleSubmit, ha
     )
 }
 
+NoteForm.propTypes = {
+    noteTitle: PropTypes.string.isRequired,
+    noteContent: PropTypes.string.isRequired,
+    remaining: PropTypes.number.isRequired,
+    counter: PropTypes.number.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleNoteTitleChange: PropTypes.func.isRequired,
+    handleNoteContentChange: PropTypes.func.isRequired
+}
 export default NoteForm;

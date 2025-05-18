@@ -1,5 +1,5 @@
 import ActionButtons from './ActionButtons';
-
+import PropTypes from 'prop-types';
 function NoteCardItem({ id, title, archived, date, description, handleDeleteNote, handleArchiveNote, handleUnarchiveNote }) {
     return (
         <div className='card-item-notes'>
@@ -14,6 +14,17 @@ function NoteCardItem({ id, title, archived, date, description, handleDeleteNote
                 handleUnarchiveNote={handleUnarchiveNote} />
         </div>
     )
+}
+
+NoteCardItem.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    archived: PropTypes.bool.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    handleDeleteNote: PropTypes.func.isRequired,
+    handleArchiveNote: PropTypes.func.isRequired,
+    handleUnarchiveNote: PropTypes.func.isRequired
 }
 
 export default NoteCardItem;
