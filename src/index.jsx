@@ -15,12 +15,17 @@ import {
 
 
 import ReactDOM from "react-dom/client";
+import HomePageUnArchice from './pages/HomePageUnarchive';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <HomePage />,
         errorElement: <NotFoundPage />,
+    },
+    {
+        path: '/unarchive',
+        element: <HomePageUnArchice />,
     },
     {
         path: '/note-detail-page/:id',

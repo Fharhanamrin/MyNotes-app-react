@@ -3,7 +3,7 @@ import NoteForm from "../components/NoteForm";
 import NoteList from "../components/NoteList";
 import NoteListArchive from "../components/NoteListArchive";
 import EmptyState from "../components/EmptyState";
-import { getAllNotes, addNote, unarchiveNote, archiveNote } from "../utils/local-data";
+import { getAllNotes, addNote, unarchiveNote, archiveNote, deleteNote } from "../utils/local-data";
 import React, { useState, useEffect } from "react";
 
 const HomePage = () => {
@@ -12,18 +12,16 @@ const HomePage = () => {
     const [noteContent, setNoteContent] = useState('');
     const [counter] = useState(50);
     const [remaining, setRemaining] = useState(50);
-    const [archivedCount, setArchivedCount] = useState(0);
     const [unarchivedCount, setUnarchivedCount] = useState(0);
 
     useEffect(() => {
         const data = getAllNotes();
         setMyList(data);
+        console.log("panggil lagi");
     }, []);
 
     useEffect(() => {
-        const archived = myList.filter(note => note.archived).length;
         const unarchived = myList.filter(note => !note.archived).length;
-        setArchivedCount(archived);
         setUnarchivedCount(unarchived);
     }, [myList]);
 
@@ -44,7 +42,9 @@ const HomePage = () => {
     };
 
     const handleDeleteNote = (id) => {
-        setMyList(prevList => prevList.filter(note => note.id !== id));
+        deleteNote(id);
+        const data = getAllNotes();
+        setMyList(data);
     };
 
     const handleArchiveNote = (id) => {
@@ -114,18 +114,7 @@ const HomePage = () => {
                     handleUnarchiveNote={handleUnarchiveNote}
                 />
             )}
-            <div className="container">
-                <h1 className='note-group'>Note List Archive</h1>
-                {archivedCount === 0 && <EmptyState />}
-                {archivedCount > 0 && (
-                    <NoteListArchive
-                        mylist={myList}
-                        handleDeleteNote={handleDeleteNote}
-                        handleArchiveNote={handleArchiveNote}
-                        handleUnarchiveNote={handleUnarchiveNote}
-                    />
-                )}
-            </div>
+           
         </div>
     );
 };
