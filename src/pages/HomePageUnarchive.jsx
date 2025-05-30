@@ -1,6 +1,4 @@
 import Header from "../components/Header";
-import NoteForm from "../components/NoteForm";
-import NoteList from "../components/NoteList";
 import NoteListArchive from "../components/NoteListArchive";
 import EmptyState from "../components/EmptyState";
 import { getAllNotes, unarchiveNote, archiveNote, deleteNote } from "../utils/local-data";
@@ -21,7 +19,6 @@ const HomePageUnArchice = () => {
     }, [myList]);
 
 
-
     const handleDeleteNote = (id) => {
         deleteNote(id);
         const data = getAllNotes();
@@ -40,9 +37,6 @@ const HomePageUnArchice = () => {
         setMyList(data);
       
     };
-
-   
-
 
     return (
         <div className="my-notes-app">
