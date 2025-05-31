@@ -1,10 +1,12 @@
 import Header from "../components/Header";
 import NoteForm from "../components/NoteForm";
 import NoteList from "../components/NoteList";
-import NoteListArchive from "../components/NoteListArchive";
 import EmptyState from "../components/EmptyState";
-import { getAllNotes, addNote, unarchiveNote, archiveNote, deleteNote } from "../utils/local-data";
+import { getActiveNotes, addNote, unarchiveNote, archiveNote, deleteNote } from "../utils/network-data";
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../components/AuthContext";
+import { useNavigate } from "react-router";
+
 
 const HomePage = () => {
     const [myList, setMyList] = useState([]);
@@ -12,20 +14,31 @@ const HomePage = () => {
     const [noteContent, setNoteContent] = useState('');
     const [counter] = useState(50);
     const [remaining, setRemaining] = useState(50);
-    const [unarchivedCount, setUnarchivedCount] = useState(0);
+    const { isAuthenticated, loading, theme } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const data = getAllNotes();
-        setMyList(data);
-        console.log("panggil lagi");
+        if (!loading && !isAuthenticated) {
+            navigate('/login');
+        }
+    }, [isAuthenticated]);
+
+    useEffect(() => {
+    }, [theme]);
+
+    useEffect(() => {
+        DataMyListActive();
     }, []);
 
-    useEffect(() => {
-        const unarchived = myList.filter(note => !note.archived).length;
-        setUnarchivedCount(unarchived);
-    }, [myList]);
-
-   
+    const DataMyListActive = async () => {
+        let response = await getActiveNotes();
+        if (!response.error) {
+            let idUserLogin = localStorage.getItem("idUserLogin");
+            const data = response.data.filter(item => item.owner == idUserLogin);
+            setMyList(data);
+            return;
+        }
+    };
 
     const handleNoteTitleChange = (event) => {
         const remainingChars = counter - event.target.value.length;
@@ -41,26 +54,28 @@ const HomePage = () => {
         setNoteContent(event.target.value);
     };
 
-    const handleDeleteNote = (id) => {
-        deleteNote(id);
-        const data = getAllNotes();
-        setMyList(data);
+    const handleDeleteNote = async (id) => {
+        let removeItem = await deleteNote(id);
+        if (!removeItem.error) {
+            DataMyListActive();
+        }
     };
 
-    const handleArchiveNote = (id) => {
-        archiveNote(id);
-        const data = getAllNotes();
-        setMyList(data);
+    const handleArchiveNote = async(id) => {
+       let archive = await archiveNote(id);
+       if (!archive.error) {
+        DataMyListActive();
+       }
     };
 
-    const handleUnarchiveNote = (id) => {
-        unarchiveNote(id);
-        const data = getAllNotes();
-        setMyList(data);
-      
+    const handleUnarchiveNote = async(id) => {
+       let unarchive = await unarchiveNote(id);
+       if (!unarchive.error) {
+        DataMyListActive();
+       }
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
 
         if (noteTitle === '') {
@@ -78,24 +93,23 @@ const HomePage = () => {
             return;
         }
 
-        addNote({
+       let newNote =  await addNote({
             title: noteTitle,
             body: noteContent
         });
 
-        setNoteTitle('');
-        setNoteContent('');
-
-        const data = getAllNotes();
-        setMyList(data);
+        if (!newNote.error) {
+            alert('Note berhasil ditambahkan');   
+            setNoteTitle('');
+            setNoteContent('');
+            DataMyListActive();
+        }
     };
 
-    
-
     return (
-        <div className="my-notes-app">
+
+        <div className={`my-notes-app-${theme}`}>
             <Header />
-           
             <NoteForm
                 noteTitle={noteTitle}
                 noteContent={noteContent}
@@ -105,8 +119,8 @@ const HomePage = () => {
                 handleNoteTitleChange={handleNoteTitleChange}
                 handleNoteContentChange={handleNoteContentChange}
             />
-            {unarchivedCount === 0 && <EmptyState />}
-            {unarchivedCount > 0 && (
+            {myList.length === 0 && <EmptyState />}
+            {myList.length > 0 && (
                 <NoteList
                     mylist={myList}
                     handleDeleteNote={handleDeleteNote}
@@ -114,8 +128,9 @@ const HomePage = () => {
                     handleUnarchiveNote={handleUnarchiveNote}
                 />
             )}
-           
+
         </div>
+
     );
 };
 

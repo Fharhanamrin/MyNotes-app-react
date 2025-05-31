@@ -1,41 +1,62 @@
 import Header from "../components/Header";
 import NoteListArchive from "../components/NoteListArchive";
 import EmptyState from "../components/EmptyState";
-import { getAllNotes, unarchiveNote, archiveNote, deleteNote } from "../utils/local-data";
+import { getArchivedNotes, unarchiveNote, archiveNote, deleteNote } from "../utils/network-data";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "../components/AuthContext";
 
 const HomePageUnArchice = () => {
     const [myList, setMyList] = useState([]);
-    const [archivedCount, setArchivedCount] = useState(0);
+ 
+
+    const { isAuthenticated, loading } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const data = getAllNotes();
-        setMyList(data);
+        if (!loading && !isAuthenticated) {
+            navigate('/login');
+        }
+    }, [isAuthenticated]);
+
+   
+
+    useEffect(() => {
+        DataMyListActive();
     }, []);
 
-    useEffect(() => {
-        const archived = myList.filter(note => note.archived).length;
-        setArchivedCount(archived);
-    }, [myList]);
-
-
-    const handleDeleteNote = (id) => {
-        deleteNote(id);
-        const data = getAllNotes();
-        setMyList(data);
+    const DataMyListActive = async () => {
+        let response = await getArchivedNotes();
+        if (!response.error) {
+            let idUserLogin = localStorage.getItem("idUserLogin");
+            const data = response.data.filter(item => item.owner == idUserLogin);
+            setMyList(data);
+            return;
+        }
     };
 
-    const handleArchiveNote = (id) => {
-        archiveNote(id);
-        const data = getAllNotes();
-        setMyList(data);
+  
+
+
+    const handleDeleteNote = async (id) => {
+        let remove = await deleteNote(id);
+        if (!remove.error) {
+            DataMyListActive();
+        }
     };
 
-    const handleUnarchiveNote = (id) => {
-        unarchiveNote(id);
-        const data = getAllNotes();
-        setMyList(data);
-      
+    const handleArchiveNote = async(id) => {
+       let archive = await archiveNote(id);
+       if (!archive.error) {
+        DataMyListActive();
+       }
+    };
+
+    const handleUnarchiveNote = async(id) => {
+       let unarchive =  await unarchiveNote(id);
+       if (!unarchive.error) {
+        DataMyListActive();
+       }
     };
 
     return (
@@ -43,8 +64,8 @@ const HomePageUnArchice = () => {
             <Header />
             <div className="container">
                 <h1 className='note-group'>Note List Archive</h1>
-                {archivedCount === 0 && <EmptyState />}
-                {archivedCount > 0 && (
+                {myList.length === 0 && <EmptyState />}
+                {myList.length > 0 && (
                     <NoteListArchive
                         mylist={myList}
                         handleDeleteNote={handleDeleteNote}

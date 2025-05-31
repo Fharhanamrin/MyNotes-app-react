@@ -3,12 +3,20 @@
   margin: 0;
   box-sizing: border-box;
 }
+.my-notes-app-light{
+  background-color: #ffffff;
+  color: #202124;
+}
 
-body {
+.my-notes-app-dark {
+  background-color: #202124;
+  color: #ffffff;
+}
+/* body {
   font-family: 'Inter', sans-serif;
   background-color: #202124;
   color: white;
-}
+} */
 
 label{
   display: block;
@@ -87,7 +95,12 @@ input::placeholder, textarea::placeholder {
 .header>a{
   text-decoration: none;
 }
-.header-title {
+.header-title-light {
+  color: dark;
+  text-decoration: none;
+}
+
+.header-title-dark {
   color: white;
   text-decoration: none;
 }

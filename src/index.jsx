@@ -16,12 +16,23 @@ import {
 
 import ReactDOM from "react-dom/client";
 import HomePageUnArchice from './pages/HomePageUnarchive';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import { AuthProvider } from './components/AuthContext';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <HomePage />,
         errorElement: <NotFoundPage />,
+    },
+    {
+        path: '/login',
+        element: <LoginPage />,
+    },
+    {
+        path: '/register',
+        element: <RegisterPage />,
     },
     {
         path: '/unarchive',
@@ -40,5 +51,7 @@ const router = createBrowserRouter([
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
-    <RouterProvider router={router} />
+    <AuthProvider>
+        <RouterProvider router={router} />
+    </AuthProvider>
 );
