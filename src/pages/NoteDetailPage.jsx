@@ -42,8 +42,33 @@ function NoteDetailPage() {
         setcreatedAt(createdAt);
     }
 
+    const [ThemeLocal, setThemeLocal] = useState('light');
+
+
+    useEffect(() => {
+        if (!loading && !isAuthenticated) {
+            navigate('/login');
+        }
+    }, [isAuthenticated]);
+
+
+
+    useEffect(() => {
+        checkSessionTheme();
+    }, [theme]);
+
+    const checkSessionTheme = () => {
+        let themeSession = localStorage.getItem('theme');
+        if (themeSession != null && themeSession != undefined && themeSession != '') {
+            localStorage.setItem('theme', `${themeSession}`);
+            setThemeLocal(themeSession);
+            return;
+        }
+        localStorage.setItem('theme', `light`);
+    }
+
     return (
-        <div className={`my-notes-app-${theme}`}>
+        <div className={`my-notes-app-${ThemeLocal}`}>
             <Header />
             <div className={`container`}>
                 <div className='card'>

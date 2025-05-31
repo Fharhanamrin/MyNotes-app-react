@@ -8,10 +8,10 @@ import { useAuth } from "../components/AuthContext";
 
 const HomePageUnArchice = () => {
     const [myList, setMyList] = useState([]);
- 
-
-    const { isAuthenticated, loading } = useAuth();
+    const { isAuthenticated, loading, theme } = useAuth();
     const navigate = useNavigate();
+    const [ThemeLocal, setThemeLocal] = useState('light');
+
 
     useEffect(() => {
         if (!loading && !isAuthenticated) {
@@ -19,7 +19,23 @@ const HomePageUnArchice = () => {
         }
     }, [isAuthenticated]);
 
-   
+
+
+    useEffect(() => {
+        checkSessionTheme();
+    }, [theme]);
+
+    const checkSessionTheme = () => {
+        let themeSession = localStorage.getItem('theme');
+        if (themeSession != null && themeSession != undefined && themeSession != '') {
+            localStorage.setItem('theme', `${themeSession}`);
+            setThemeLocal(themeSession);
+            return;
+        }
+        localStorage.setItem('theme', `light`);
+    }
+
+
 
     useEffect(() => {
         DataMyListActive();
@@ -35,7 +51,7 @@ const HomePageUnArchice = () => {
         }
     };
 
-  
+
 
 
     const handleDeleteNote = async (id) => {
@@ -45,22 +61,22 @@ const HomePageUnArchice = () => {
         }
     };
 
-    const handleArchiveNote = async(id) => {
-       let archive = await archiveNote(id);
-       if (!archive.error) {
-        DataMyListActive();
-       }
+    const handleArchiveNote = async (id) => {
+        let archive = await archiveNote(id);
+        if (!archive.error) {
+            DataMyListActive();
+        }
     };
 
-    const handleUnarchiveNote = async(id) => {
-       let unarchive =  await unarchiveNote(id);
-       if (!unarchive.error) {
-        DataMyListActive();
-       }
+    const handleUnarchiveNote = async (id) => {
+        let unarchive = await unarchiveNote(id);
+        if (!unarchive.error) {
+            DataMyListActive();
+        }
     };
 
     return (
-        <div className="my-notes-app">
+        <div className={`my-notes-app-${ThemeLocal}`}>
             <Header />
             <div className="container">
                 <h1 className='note-group'>Note List Archive</h1>

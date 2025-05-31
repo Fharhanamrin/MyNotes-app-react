@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         checkAuthStatus();
+        checkSessionTheme();
     }, []);
 
     const checkAuthStatus = async () => {
@@ -30,14 +31,28 @@ export function AuthProvider({ children }) {
         }
     };
 
+    const checkSessionTheme = () => {
+        let themeSession = localStorage.getItem('theme');
+        if (themeSession != null && themeSession != undefined && themeSession != '') {
+            localStorage.setItem('theme', `${themeSession}`); 
+            setTheme(themeSession);
+            return;
+        }
+        localStorage.setItem('theme', `light`); 
+    }
+
     const changeTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        localStorage.setItem('theme', `newTheme`); 
-        setTheme(newTheme);
+        let themeSession = localStorage.getItem('theme') === 'light' ? 'dark' : 'light';
+        if (themeSession!=null && themeSession!=undefined && themeSession!='') {
+            localStorage.setItem('theme', `${themeSession}`); 
+            setTheme(themeSession);
+            return;
+        }
     }
 
     const logout = () => {
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('theme');
         setIsAuthenticated(false);
         setLoading(false);
     };

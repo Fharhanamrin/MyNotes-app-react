@@ -17,6 +17,8 @@ const HomePage = () => {
     const { isAuthenticated, loading, theme } = useAuth();
     const navigate = useNavigate();
 
+    const [ThemeLocal, setThemeLocal] = useState('light');
+
     useEffect(() => {
         if (!loading && !isAuthenticated) {
             navigate('/login');
@@ -24,7 +26,20 @@ const HomePage = () => {
     }, [isAuthenticated]);
 
     useEffect(() => {
+        checkSessionTheme();
     }, [theme]);
+
+    const checkSessionTheme = () => {
+        let themeSession = localStorage.getItem('theme');
+        if (themeSession != null && themeSession != undefined && themeSession != '') {
+            localStorage.setItem('theme', `${themeSession}`);
+            setThemeLocal(themeSession);
+            return;
+        }
+        localStorage.setItem('theme', `light`);
+    }
+
+
 
     useEffect(() => {
         DataMyListActive();
@@ -61,21 +76,21 @@ const HomePage = () => {
         }
     };
 
-    const handleArchiveNote = async(id) => {
-       let archive = await archiveNote(id);
-       if (!archive.error) {
-        DataMyListActive();
-       }
+    const handleArchiveNote = async (id) => {
+        let archive = await archiveNote(id);
+        if (!archive.error) {
+            DataMyListActive();
+        }
     };
 
-    const handleUnarchiveNote = async(id) => {
-       let unarchive = await unarchiveNote(id);
-       if (!unarchive.error) {
-        DataMyListActive();
-       }
+    const handleUnarchiveNote = async (id) => {
+        let unarchive = await unarchiveNote(id);
+        if (!unarchive.error) {
+            DataMyListActive();
+        }
     };
 
-    const handleSubmit = async(event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (noteTitle === '') {
@@ -93,13 +108,13 @@ const HomePage = () => {
             return;
         }
 
-       let newNote =  await addNote({
+        let newNote = await addNote({
             title: noteTitle,
             body: noteContent
         });
 
         if (!newNote.error) {
-            alert('Note berhasil ditambahkan');   
+            alert('Note berhasil ditambahkan');
             setNoteTitle('');
             setNoteContent('');
             DataMyListActive();
@@ -108,7 +123,7 @@ const HomePage = () => {
 
     return (
 
-        <div className={`my-notes-app-${theme}`}>
+        <div className={`my-notes-app-${ThemeLocal}`}>
             <Header />
             <NoteForm
                 noteTitle={noteTitle}

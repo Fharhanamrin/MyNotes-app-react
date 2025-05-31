@@ -6,17 +6,15 @@
 .my-notes-app-light{
   background-color: #ffffff;
   color: #202124;
+  height: 200vh;
 }
 
 .my-notes-app-dark {
   background-color: #202124;
   color: #ffffff;
+  height: 200vh;
 }
-/* body {
-  font-family: 'Inter', sans-serif;
-  background-color: #202124;
-  color: white;
-} */
+
 
 label{
   display: block;
