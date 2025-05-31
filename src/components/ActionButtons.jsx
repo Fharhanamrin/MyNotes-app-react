@@ -1,4 +1,8 @@
+import { NavLink } from "react-router";
+import PropTypes from "prop-types";
+
 function ActionButtons({ id, archived, handleDeleteNote, handleArchiveNote, handleUnarchiveNote }) {
+ 
     return (
         <div>
 
@@ -28,8 +32,17 @@ function ActionButtons({ id, archived, handleDeleteNote, handleArchiveNote, hand
                 Archive
             </button>) : null}
 
+            <NavLink className="action-button archive-button" to={`/note-detail-page/${id}`}>Detail</NavLink>
+
 
         </div>
     )
+}
+ActionButtons.propTypes = {
+    id: PropTypes.string.isRequired,
+    archived: PropTypes.bool.isRequired,
+    handleDeleteNote: PropTypes.func.isRequired,
+    handleArchiveNote: PropTypes.func.isRequired,
+    handleUnarchiveNote: PropTypes.func.isRequired
 }
 export default ActionButtons;

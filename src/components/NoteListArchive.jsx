@@ -1,5 +1,7 @@
 import { showFormattedDate } from '../utils';
 import NoteCardItem from './NoteCardItem';
+import PropTypes from 'prop-types';
+
 function NoteListArchive({ mylist, handleDeleteNote, handleArchiveNote, handleUnarchiveNote }) {
     return (
         <div style={{
@@ -31,6 +33,13 @@ function NoteListArchive({ mylist, handleDeleteNote, handleArchiveNote, handleUn
 
         </div>
     );
+}
+
+NoteListArchive.propTypes = {
+    mylist: PropTypes.arrayOf(PropTypes.object).isRequired,
+    handleDeleteNote: PropTypes.func.isRequired,
+    handleUnarchiveNote: PropTypes.func.isRequired,
+    handleArchiveNote: PropTypes.func.isRequired,
 }
 
 export default NoteListArchive;
