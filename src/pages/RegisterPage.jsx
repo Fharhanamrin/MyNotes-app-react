@@ -21,7 +21,7 @@ function RegisterPage() {
     return () => {
       
     }
-  }, [isAuthenticated, loading, navigate]);
+  }, [isAuthenticated, loading]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

@@ -23,7 +23,7 @@ const HomePage = () => {
         if (!loading && !isAuthenticated) {
             navigate('/login');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated,loading]);
 
     useEffect(() => {
         checkSessionTheme();

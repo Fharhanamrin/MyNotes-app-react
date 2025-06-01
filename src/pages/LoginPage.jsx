@@ -20,7 +20,7 @@ export default function LoginPage() {
         return () => {
 
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, loading]);
 
     const handleLogin = async (e) => {
         e.preventDefault();

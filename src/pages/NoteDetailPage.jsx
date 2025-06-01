@@ -15,10 +15,11 @@ function NoteDetailPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log(`loading ${loading}, isAuthenticated ${isAuthenticated}`);
         if (!loading && !isAuthenticated) {
             navigate('/login');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated,loading]);
 
     const { id } = useParams();
 
