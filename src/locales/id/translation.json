@@ -1,0 +1,30 @@
+{
+  "welcome": "Selamat Datang di React + Vite",
+  "hello": "Halo {{name}}!",
+  "description": "Ini adalah aplikasi multibahasa",
+  "changeLanguage": "Ubah Bahasa",
+  "navigation": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "profile": "Profil"
+  },
+  "form": {
+    "name": "Nama",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "submit": "Kirim",
+    "cancel": "Batal"
+  },
+  "messages": {
+    "success": "Operasi berhasil!",
+    "error": "Terjadi kesalahan",
+    "loading": "Memuat..."
+  },
+  "counter": {
+    "title": "Penghitung",
+    "count": "Hitungan: {{count}}",
+    "increment": "Tambah",
+    "decrement": "Kurang"
+  }
+}

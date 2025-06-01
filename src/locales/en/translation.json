@@ -1,0 +1,30 @@
+{
+  "welcome": "Welcome to React + Vite",
+  "hello": "Hello {{name}}!",
+  "description": "This is a multilingual application",
+  "changeLanguage": "Change Language",
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "profile": "Profile"
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "messages": {
+    "success": "Operation successful!",
+    "error": "An error occurred",
+    "loading": "Loading..."
+  },
+  "counter": {
+    "title": "Counter",
+    "count": "Count: {{count}}",
+    "increment": "Increment",
+    "decrement": "Decrement"
+  }
+}

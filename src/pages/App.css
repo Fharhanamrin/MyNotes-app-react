@@ -1,0 +1,24 @@
+/* App.css */
+.language-switcher {
+    margin: 20px 0;
+}
+
+.language-switcher button {
+    margin: 0 5px;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.language-switcher button.active {
+    background: #007bff;
+    color: white;
+}
+
+.language-select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}

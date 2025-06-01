@@ -5,7 +5,7 @@ import './styles/style.css';
 import HomePage from './pages/HomePage';
 import NoteDetailPage from './pages/NoteDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
-
+import './i18n';
 
 
 import {
@@ -19,6 +19,7 @@ import HomePageUnArchice from './pages/HomePageUnarchive';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import { AuthProvider } from './components/AuthContext';
+import LandingPage from './pages/LandingPage';
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     {
         path: '/login',
         element: <LoginPage />,
+    },
+    {
+        path: '/landing-page',
+        element: <LandingPage />,
     },
     {
         path: '/register',
